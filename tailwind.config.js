@@ -14,6 +14,9 @@ module.exports = {
       '6xl': '4rem'
     },
     extend: {
+      fontFamily: {
+        goose: ['Goose', 'cursive']
+      },
       colors: {
         gray: {
           100: '#f7fafc',

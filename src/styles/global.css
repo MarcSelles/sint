@@ -1,4 +1,8 @@
 @tailwind base;
+@font-face {
+  font-family: 'Goose';
+  src: url('../../public/font/Goose/Goose Regular/Goose Regular.ttf');
+}
 
 a {
   @apply text-blue-700;

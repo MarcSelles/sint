@@ -1,6 +1,6 @@
+import { NextSeo } from 'next-seo';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { NextSeo } from 'next-seo';
 
 import { AppConfig } from '../utils/AppConfig';
 
@@ -11,7 +11,7 @@ const Layout = ({ preview, navigation, footer, meta, children }) => {
   return (
     <>
       <Head>
-        <title>Bikkelhart NextJS Boilerplate</title>
+        <title>Elise Wijema</title>
         <meta name="description" content="Awesome" />
 
         <meta charSet="UTF-8" key="charset" />

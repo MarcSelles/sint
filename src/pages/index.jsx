@@ -1,22 +1,10 @@
-import { AppConfig } from '../utils/AppConfig';
+import { useState } from 'react';
+import Game from '../components/screens/Game';
+import Start from '../components/screens/Start';
 
 const Index = () => {
-  return (
-    <>
-      <h1>Bikkelhart Boilerplate NextJS</h1>
-    </>
-  );
-};
-
-export const getStaticProps = async ({ preview = false }) => {
-  const pageData = AppConfig ?? [];
-
-  return {
-    props: {
-      ...pageData,
-      preview
-    }
-  };
+  const [screen, setScreen] = useState('start');
+  return <>{screen == 'start' ? <Start onClick={() => setScreen('game')} /> : <Game />}</>;
 };
 
 export default Index;
