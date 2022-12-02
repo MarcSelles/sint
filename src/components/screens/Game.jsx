@@ -2,85 +2,67 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import Confetti from 'react-confetti';
 import Dice from 'react-dice-roll';
+import { Toaster } from 'react-hot-toast';
 import Card from '../card/Card';
 import Modal from '../Modal';
+import QuestionModal from '../modal/QuestionModal';
 
 const content = [
   {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
+    title: 'We beginnen makkelijk!',
+    description:
+      'Assie en Matthies hebben een heerlijk busje om in mee te gaan op vakantie. Maar wat voor merk is het busje?',
+    multipleChoice: [
+      { title: 'Volvo', rightAnswer: false },
+      { title: 'Volkswagen', rightAnswer: true },
+      { title: 'Skoda', rightAnswer: false }
+    ],
+    image1: 'car-happy.jpeg',
+    image2: 'car-sleep.jpeg'
   },
   {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
+    title: 'Snelle ronde!',
+    description:
+      'Wees snel! Je hebt een dyslexie voorsprong. Geef Noud een knuffel binnen 10 seconden! Je mag weg rennen Noud!',
+    image1: 'hug-as-noud.jpeg',
+    image2: 'dinner-noud-el.jpeg',
+    timer: 10
   },
   {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
+    title: 'Feitjesronde',
+    description:
+      'Een echte Elise houdt van vakantie! Frankrijk, Italië, Spanje, het maakt allemaal niet uit. Dit jaar natuurlijk ook Mallorca, dus de vraag: Heeft Mallorca meer of minder dan 1 miljoen inwoners?',
+    multipleChoice: [
+      { title: '< 1.000.000', rightAnswer: true },
+      { title: '> 1.000.000', rightAnswer: false }
+    ],
+    image1: 'friends.jpeg',
+    image2: 'mallorca-do-lucia-am.jpeg'
   },
   {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
+    title: 'Familie is belangrijk!',
+    description: 'Noem 15 familieleden in 20 seconden!',
+    timer: 20,
+    image1: 'family.jpeg',
+    image2: 'escape-room.jpeg'
   },
   {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
+    title: 'Bierquizzz',
+    description:
+      "Bij het altijd bruisende Javaplein zijn veel barretjes en café's te vienden. Zo ook Oedipus in het badhuis tegenover je huis. Maaarrrrr... sinds wanneer zit Oedipus in het badhuis?",
+    image1: 'pubquiz.jpeg',
+    image2: undefined,
+    multipleChoice: [
+      { title: 'Altijd al', rightAnswer: false },
+      { title: '2014', rightAnswer: false },
+      { title: '2020', rightAnswer: true },
+      { title: '2022', rightAnswer: false }
+    ]
   },
   {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
-  },
-  {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
-  },
-  {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
-  },
-  {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
-  },
-  {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
-  },
-  {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
-  },
-  {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
-    image1: undefined,
-    image2: undefined
-  },
-  {
-    title: 'Dit is de eerste titel',
-    description: 'Nog wat uitleg',
+    title: 'Game master',
+    description:
+      'Laat je boomerang foo (of gil) skills zien! Speel 1 ronde tegen Assie en Matthies en win!',
     image1: undefined,
     image2: undefined
   }
@@ -88,14 +70,56 @@ const content = [
 
 const punishment = [
   {
-    title: 'Punishment',
-    description: 'Nog wat uitleg',
+    title: 'Aiii, dat was niet goed.',
+    description: 'Haal het volgende rondje drinken voor iedereen!',
     image1: undefined,
     image2: undefined
   },
   {
-    title: 'Punishment 2',
-    description: 'Nog wat uitleg',
+    title: 'Oef, niet goed.',
+    description: 'Laat iemand een straf verzinnen voor je. Roept u maar!',
+    image1: undefined,
+    image2: undefined
+  },
+  {
+    title: 'Oeps, kan gebeuren',
+    description: 'Sint en piet zien je fout door de vingers.',
+    image1: undefined,
+    image2: undefined
+  },
+  {
+    title: 'Oeps, kan gebeuren',
+    description: 'Sint en piet zien je fout door de vingers.',
+    image1: undefined,
+    image2: undefined
+  },
+  {
+    title: 'Oeps, kan gebeuren',
+    description: 'Sint en piet zien je fout door de vingers.',
+    image1: undefined,
+    image2: undefined
+  },
+  {
+    title: 'Oeps, kan gebeuren',
+    description: 'Sint en piet zien je fout door de vingers.',
+    image1: undefined,
+    image2: undefined
+  },
+  {
+    title: 'Oeps, kan gebeuren',
+    description: 'Sint en piet zien je fout door de vingers.',
+    image1: undefined,
+    image2: undefined
+  },
+  {
+    title: 'Oeps, kan gebeuren',
+    description: 'Sint en piet zien je fout door de vingers.',
+    image1: undefined,
+    image2: undefined
+  },
+  {
+    title: 'Oeps, kan gebeuren',
+    description: 'Sint en piet zien je fout door de vingers.',
     image1: undefined,
     image2: undefined
   }
@@ -109,16 +133,17 @@ const sixContent = {
 const Game = () => {
   const [step, setStep] = useState(0);
   const [nrOfThrows, setNrOfThrows] = useState(0);
-  const [questionNr, setQuestionNr] = useState(0);
+  const [questionNr, setQuestionNr] = useState(-1);
   const [refPresent, setRefPresent] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showFinish, setShowFinish] = useState(false);
   const [showSix, setShowSix] = useState(false);
   const [isPunishment, setIsPunishment] = useState(false);
-  const [punishmentNr, setPunishmentNr] = useState(0);
+  const [punishmentNr, setPunishmentNr] = useState(-1);
 
   const card = useRef();
   const dice = useRef();
+  const gridRef = useRef();
 
   const steps = [5, 1, 4, 2, 6, 6, 6, 5, 2, 4];
 
@@ -184,6 +209,7 @@ const Game = () => {
       <div className="absolute top-0 left-0 w-screen h-screen -z-20">
         <Image src="/img/ganzenbord.jpeg" layout="fill" objectFit="cover" />
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="absolute w-screen top-1 bg-red p-20 pr-10 flex justify-end z-10" ref={dice}>
         <Dice
           onRoll={(value) => {
@@ -207,13 +233,13 @@ const Game = () => {
             setStep((old) => old + value);
           }}
           cheatValue={steps[nrOfThrows]}
-          size={284}
+          size={(gridRef.current?.offsetHeight / 7) * 2 ?? 284}
           rollingTime={rollTime}
           className="mt-1"
         />
       </div>
       <div className="min-h-screen flex flex-col justify-center z-40">
-        <div className="p-10 relative grid grid-cols-8 gap-4">
+        <div className="p-10 relative grid grid-cols-8 gap-4" ref={gridRef}>
           <div
             className="absolute z-10 top-[115px] transition-transform duration-500"
             style={{
@@ -297,7 +323,7 @@ const Game = () => {
           <div className="col-span-1 relative before:absolute before:top-1/2 before:-translate-y-1/2 before:h-4 before:w-4 before:bg-gray-400 before:-z-10 before:-translate-x-full before:left-0">
             <Card active={step == 23} setStep={setStep} front={23} />
           </div>
-          <div className="col-span-1 relative before:absolute before:top-1/2 before:-translate-y-1/2 before:h-4 before:w-4 before:bg-gray-400 before:-z-10 before:-translate-x-full before:left-0">
+          <div className="col-span-1 relative before:absolute before:top-1/2 before:-translate-y-1/2 before:h-4 before:w-4 before:bg-gray-400 before:-z-10 before:-translate-x-full before:left-0  ">
             <Card active={step == 22} setStep={setStep} front={22} />
           </div>
           <div className="col-span-1 relative before:absolute before:top-1/2 before:-translate-y-1/2 before:h-4 before:w-4 before:bg-gray-400 before:-z-10 before:-translate-x-full before:left-0">
@@ -333,56 +359,21 @@ const Game = () => {
         </div>
       </div>
 
-      <Modal show={showModal}>
-        <h2 className="text-3xl font-bold mb-5">
-          {isPunishment
-            ? punishment[punishmentNr % punishment.length].title
-            : content[questionNr % content.length].title}
-        </h2>
-        <p className="text-xl mb-10">
-          {isPunishment
-            ? punishment[punishmentNr % punishment.length].description
-            : content[questionNr % content.length].description}
-        </p>
-        <div className="flex justify-between w-full">
-          <button
-            onClick={() => {
-              // setShowModal(false);
-              setIsPunishment(true);
-              setPunishmentNr((nr) => ++nr);
-              // setStep((step) => step - 1);
-            }}
-            className="flex flex-col items-center"
-          >
-            <Image
-              src="/img/sad.png"
-              width={80}
-              height={100}
-              objectFit="cover"
-              objectPosition="bottom"
-              className="rounded-full overflow-hidden"
-            />
-            <span className="mt-1 block">Helaas, niet gelukt</span>
-          </button>
-          <button
-            onClick={() => {
-              setIsPunishment(false);
-              setShowModal(false);
-            }}
-            className="flex flex-col items-center"
-          >
-            <Image
-              src="/img/happy.jpeg"
-              width={80}
-              height={100}
-              objectFit="cover"
-              objectPosition="bottom"
-              className="rounded-full overflow-hidden"
-            />
-            <span className="mt-1 block">Goed</span>
-          </button>
-        </div>
-      </Modal>
+      <QuestionModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        setIsPunishment={setIsPunishment}
+        setPunishmentNr={setPunishmentNr}
+        {...content[questionNr]}
+      />
+      <QuestionModal
+        showModal={isPunishment}
+        isPunishment
+        setShowModal={setIsPunishment}
+        setIsPunishment={setIsPunishment}
+        setPunishmentNr={setPunishmentNr}
+        {...punishment[punishmentNr]}
+      />
 
       <Modal show={showSix}>
         <h2 className="text-3xl font-bold mb-5">{sixContent.title}</h2>
@@ -409,6 +400,13 @@ const Game = () => {
 
       <Modal show={showFinish}>
         <h2 className="text-3xl font-bold mb-5">GEFELICITEERD</h2>
+        <p className="text-xl mb-4">
+          Je kunt je cadeau vinden in de geneesmiddelen kist. Ga er gelijk heen, je hebt het
+          verdiend!
+        </p>
+        <video autoPlay muted loop width={300} height={500}>
+          <source src="/img/thumbs-up.mp4" type="video/mp4"></source>
+        </video>
       </Modal>
 
       {showFinish && <Confetti />}
@@ -419,6 +417,6 @@ const Game = () => {
 // 7
 // 1. Boomerang Foo
 // 2. Knuffel Noud
-// 3.
+// 3. Auto merk?
 
 export default Game;
