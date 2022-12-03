@@ -53,13 +53,13 @@ const QuestionModal = ({
   return (
     <Modal show={showModal}>
       <h2 className="text-3xl font-bold mb-5">{title}</h2>
-      <p className="text-xl mb-5">{description}</p>
+      <p className="text-2xl mb-5">{description}</p>
       {multipleChoice && (
         <ul className="mb-4 flex justify-between">
           {multipleChoice.map((option, i) => (
             <li key={i}>
               <button
-                className="p-2 bg-lime-600 rounded-2xl min-w-[140px]"
+                className="p-2 bg-lime-600 rounded-2xl text-2xl min-w-[140px]"
                 onClick={option.rightAnswer ? onSuccess : onFailed}
               >
                 {option.title}

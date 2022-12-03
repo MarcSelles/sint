@@ -137,6 +137,7 @@ const Game = () => {
   const [refPresent, setRefPresent] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showFinish, setShowFinish] = useState(false);
+  const [showStart, setShowStart] = useState(true);
   const [showSix, setShowSix] = useState(false);
   const [isPunishment, setIsPunishment] = useState(false);
   const [punishmentNr, setPunishmentNr] = useState(-1);
@@ -210,7 +211,10 @@ const Game = () => {
         <Image src="/img/ganzenbord.jpeg" layout="fill" objectFit="cover" />
       </div>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="absolute w-screen top-1 bg-red p-20 pr-10 flex justify-end z-10" ref={dice}>
+      <div
+        className="absolute w-screen top-[68px] right-5 bg-red p-20 pr-10 flex justify-end z-10"
+        ref={dice}
+      >
         <Dice
           onRoll={(value) => {
             if (step + value == 35) {
@@ -375,9 +379,35 @@ const Game = () => {
         {...punishment[punishmentNr]}
       />
 
+      <Modal show={showStart}>
+        <h2 className="text-3xl font-bold mb-5">Kort de spelregels</h2>
+        <p className="text-2xl mb-2">
+          Net als bij Ganzenbord is het de bedoeling dat je gooit en precies op finish eindigt. Elk
+          vakje bevat een opdracht of vraag die moet worden uitgevoerd/beantwoord. Wanneer je een 6
+          gooit mag je nog eens gooien, maar kijk uit! Als je 3 keer achter elkaar 6 gooit moet je
+          opnieuw beginnen.
+        </p>
+        <p className="text-2xl mb-4">
+          Nog een kleine tip: sommige vakjes bevatten opdrachten die gelijk uitgevoerd moeten
+          worden. Leg dus de laptop gelijk weg als je hebt gegooid, dan kun je gelijk in actie
+          komen.
+        </p>
+        <button onClick={() => setShowStart(false)} className="flex flex-col items-center">
+          <Image
+            src="/img/happy.jpeg"
+            width={80}
+            height={100}
+            objectFit="cover"
+            objectPosition="bottom"
+            className="rounded-full overflow-hidden"
+          />
+          <span className="mt-1 block">Let's go!</span>
+        </button>
+      </Modal>
+
       <Modal show={showSix}>
         <h2 className="text-3xl font-bold mb-5">{sixContent.title}</h2>
-        <p className="text-xl mb-10">{sixContent.description}</p>
+        <p className="text-2xl mb-10">{sixContent.description}</p>
         <div className="flex justify-between w-full">
           <button
             onClick={() => {
@@ -400,7 +430,7 @@ const Game = () => {
 
       <Modal show={showFinish}>
         <h2 className="text-3xl font-bold mb-5">GEFELICITEERD</h2>
-        <p className="text-xl mb-4">
+        <p className="text-2xl mb-4">
           Je kunt je cadeau vinden in de geneesmiddelen kist. Ga er gelijk heen, je hebt het
           verdiend!
         </p>
